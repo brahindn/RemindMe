@@ -1,0 +1,6 @@
+@RemindMe.Host_HostAddress = http://localhost:5273
+
+GET {{RemindMe.Host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
