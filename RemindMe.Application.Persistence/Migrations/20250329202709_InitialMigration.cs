@@ -63,8 +63,6 @@ namespace RemindMe.Application.Persistence.Migrations
                 table: "Users",
                 column: "PhoneNumber",
                 unique: true);
-
-            migrationBuilder.Sql("ALTER TABLE \"Shipping\" ADD CONSTRAINT \"CHK_ShippingTime\" CHECK (\"ShippingTime\" <= NOW() AND \"ShippingTime\" <= '9999-12-31');");
         }
 
         /// <inheritdoc />
