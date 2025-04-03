@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RemindMe.Application\RemindMe.Application.csproj" />
+    <ProjectReference Include="..\RemindMe.Contracts\RemindMe.Contracts.csproj" />
+    <ProjectReference Include="..\RemindMe.Domain\RemindMe.Domain.csproj" />
   </ItemGroup>
 
 </Project>

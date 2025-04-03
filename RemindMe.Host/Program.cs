@@ -4,6 +4,7 @@ using RemindMe.Application.IServices;
 using RemindMe.Application.Persistence;
 using RemindMe.Application.Persistence.Repositories;
 using RemindMe.Application.Persistence.Services;
+using RemindMe.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,12 +24,14 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    app.UseHsts();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
 app.UseAuthorization();
 
 app.MapControllers();

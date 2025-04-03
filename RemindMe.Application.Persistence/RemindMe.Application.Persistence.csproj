@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RemindMe.Application\RemindMe.Application.csproj" />
     <ProjectReference Include="..\RemindMe.Domain\RemindMe.Domain.csproj" />
+    <ProjectReference Include="..\RemindMe.Infrastructure\RemindMe.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

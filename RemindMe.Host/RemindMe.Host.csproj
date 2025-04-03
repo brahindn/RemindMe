@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
       <PrivateAssets>all</PrivateAssets>
@@ -19,6 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RemindMe.Application.Persistence\RemindMe.Application.Persistence.csproj" />
+    <ProjectReference Include="..\RemindMe.Infrastructure\RemindMe.Infrastructure.csproj" />
+    <ProjectReference Include="..\RemindMe.WebApi\RemindMe.WebApi.csproj" />
   </ItemGroup>
 
 </Project>
