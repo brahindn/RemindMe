@@ -1,7 +1,7 @@
 ﻿using RemindMe.Application.IRepositories;
 using RemindMe.Domain.Entities;
 
-namespace RemindMe.Application.Persistence.Repositories
+namespace RemindMe.Infrastructure.Persistence.Repositories
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {

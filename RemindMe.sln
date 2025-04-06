@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Host", "RemindMe.H
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Application", "RemindMe.Application\RemindMe.Application.csproj", "{F171E431-6E73-48B5-9EE2-0E21C890E091}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Application.Persistence", "RemindMe.Application.Persistence\RemindMe.Application.Persistence.csproj", "{38CB33C3-42AA-4B81-B44A-8EF455E747E8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Domain", "RemindMe.Domain\RemindMe.Domain.csproj", "{676C6B30-C0B7-4C65-A900-79C4C5D56EA0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Contracts", "RemindMe.Contracts\RemindMe.Contracts.csproj", "{0A72E019-6C0A-426A-BC8E-E52ED1105BFF}"
@@ -16,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.WebApi", "RemindMe.WebApi\RemindMe.WebApi.csproj", "{9D0F1469-E1A5-482B-852D-B59ABCF01E23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Infrastructure", "RemindMe.Infrastructure\RemindMe.Infrastructure.csproj", "{FE8F2007-1230-4932-8414-C337BC349093}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Infrastructure.Persistence", "RemindMe.Infrastructure.Persistence\RemindMe.Infrastructure.Persistence.csproj", "{D0BD674E-64B9-4D45-9CD7-1394914D3621}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +31,6 @@ Global
 		{F171E431-6E73-48B5-9EE2-0E21C890E091}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F171E431-6E73-48B5-9EE2-0E21C890E091}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F171E431-6E73-48B5-9EE2-0E21C890E091}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38CB33C3-42AA-4B81-B44A-8EF455E747E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38CB33C3-42AA-4B81-B44A-8EF455E747E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38CB33C3-42AA-4B81-B44A-8EF455E747E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38CB33C3-42AA-4B81-B44A-8EF455E747E8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{676C6B30-C0B7-4C65-A900-79C4C5D56EA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{676C6B30-C0B7-4C65-A900-79C4C5D56EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{676C6B30-C0B7-4C65-A900-79C4C5D56EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +47,10 @@ Global
 		{FE8F2007-1230-4932-8414-C337BC349093}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE8F2007-1230-4932-8414-C337BC349093}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE8F2007-1230-4932-8414-C337BC349093}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0BD674E-64B9-4D45-9CD7-1394914D3621}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0BD674E-64B9-4D45-9CD7-1394914D3621}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0BD674E-64B9-4D45-9CD7-1394914D3621}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0BD674E-64B9-4D45-9CD7-1394914D3621}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace RemindMe.Application.Persistence.Migrations
+namespace RemindMe.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class InitialMigration : Migration

@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using RemindMe.Application.Persistence;
+using RemindMe.Infrastructure.Persistence;
 
 #nullable disable
 
 namespace RemindMe.Application.Persistence.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20250329202709_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20250406181018_Unrequired reminder's properties")]
+    partial class Unrequiredremindersproperties
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

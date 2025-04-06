@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using RemindMe.Application.IRepositories;
 using RemindMe.Application.IServices;
-using RemindMe.Application.Persistence;
-using RemindMe.Application.Persistence.Repositories;
-using RemindMe.Application.Persistence.Services;
-using RemindMe.Infrastructure;
+using RemindMe.Infrastructure.Persistence;
+using RemindMe.Infrastructure.Persistence.Repositories;
+using RemindMe.Infrastructure.Persistence.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

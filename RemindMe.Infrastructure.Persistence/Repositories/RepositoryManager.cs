@@ -1,6 +1,6 @@
 ﻿using RemindMe.Application.IRepositories;
 
-namespace RemindMe.Application.Persistence.Repositories
+namespace RemindMe.Infrastructure.Persistence.Repositories
 {
     public class RepositoryManager : IRepositoryManager
     {

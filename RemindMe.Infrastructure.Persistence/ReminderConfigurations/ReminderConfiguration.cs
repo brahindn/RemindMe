@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RemindMe.Domain.Entities;
 
-namespace RemindMe.Application.Persistence.ReminderConfogurations
+namespace RemindMe.Infrastructure.Persistence.ReminderConfigurations
 {
     public class ReminderConfiguration : IEntityTypeConfiguration<Reminder>
     {
@@ -18,11 +18,11 @@ namespace RemindMe.Application.Persistence.ReminderConfogurations
             builder.Property(st => st.ShippingTime)
                 .IsRequired();
 
-            builder.Property(d => d.UserDestination)
-                .IsRequired();
+            /*builder.Property(d => d.UserDestination)
+                .IsRequired();*/
 
-            builder.Property(u => u.UserId)
-                .IsRequired();
+            /*builder.Property(u => u.UserId)
+                .IsRequired();*/
         }
     }
 }

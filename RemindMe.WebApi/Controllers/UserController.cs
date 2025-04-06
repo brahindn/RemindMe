@@ -4,7 +4,7 @@ using RemindMe.Contracts.Requests;
 
 namespace RemindMe.WebApi.Controllers
 {
-    [Route("api/users")]
+    [Route("api/reminders")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -13,14 +13,6 @@ namespace RemindMe.WebApi.Controllers
         public UserController(IServiceManager serviceManager)
         {
             _serviceManager = serviceManager;
-        }
-
-        [HttpPost("create-new-user")]
-        public Task<IActionResult> CreateNewUser([FromBody] CreateUserRequest user)
-        {
-            _serviceManager.UserService.CreateUserAsync(user);
-
-            return Task.FromResult<IActionResult>(Ok());
         }
     }
 }

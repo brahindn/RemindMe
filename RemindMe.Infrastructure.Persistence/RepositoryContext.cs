@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RemindMe.Application.Persistence.ReminderConfogurations;
 using RemindMe.Domain.Entities;
+using RemindMe.Infrastructure.Persistence.ReminderConfigurations;
 
-namespace RemindMe.Application.Persistence
+namespace RemindMe.Infrastructure.Persistence
 {
     public class RepositoryContext : DbContext
     {

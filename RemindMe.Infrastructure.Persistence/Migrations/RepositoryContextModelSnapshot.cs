@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using RemindMe.Application.Persistence;
+using RemindMe.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace RemindMe.Application.Persistence.Migrations
+namespace RemindMe.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
     partial class RepositoryContextModelSnapshot : ModelSnapshot

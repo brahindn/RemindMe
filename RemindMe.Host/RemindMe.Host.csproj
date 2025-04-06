@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RemindMe.Application.Persistence\RemindMe.Application.Persistence.csproj" />
+    <ProjectReference Include="..\RemindMe.Infrastructure.Persistence\RemindMe.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\RemindMe.Infrastructure\RemindMe.Infrastructure.csproj" />
     <ProjectReference Include="..\RemindMe.WebApi\RemindMe.WebApi.csproj" />
   </ItemGroup>

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RemindMe.Domain.Entities;
 
-namespace RemindMe.Application.Persistence.ReminderConfogurations
+namespace RemindMe.Infrastructure.Persistence.ReminderConfigurations
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {
