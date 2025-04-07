@@ -19,7 +19,7 @@ namespace RemindMe.Infrastructure.Persistence.Repositories
         public IReminderRepository Reminder => _reminderRepository.Value;
         public IUserRepository User => _userRepository.Value;
 
-        public async Task SaveAsyn()
+        public async Task SaveAsync()
         {
             await _repositoryContext.SaveChangesAsync();
         }

@@ -18,11 +18,11 @@ namespace RemindMe.Infrastructure.Persistence.ReminderConfigurations
             builder.Property(st => st.ShippingTime)
                 .IsRequired();
 
-            /*builder.Property(d => d.UserDestination)
-                .IsRequired();*/
+            builder.Property(d => d.UserDestination)
+                .IsRequired();
 
-            /*builder.Property(u => u.UserId)
-                .IsRequired();*/
+            builder.Property(u => u.UserId)
+                .IsRequired();
         }
     }
 }

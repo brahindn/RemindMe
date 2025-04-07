@@ -4,6 +4,6 @@
     {
         IUserRepository User { get; }
         IReminderRepository Reminder { get; }
-        Task SaveAsyn();
+        Task SaveAsync();
     }
 }

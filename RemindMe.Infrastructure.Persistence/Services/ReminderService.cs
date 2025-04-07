@@ -14,6 +14,7 @@ namespace RemindMe.Infrastructure.Persistence.Services
         {
             _repositoryManager = repositoryManager;
         }
+
         public async Task CreateReminderAsync(CreateReminderRequest createReminderRequest)
         {
             if(createReminderRequest == null)
@@ -21,19 +22,15 @@ namespace RemindMe.Infrastructure.Persistence.Services
                 return;
             }
 
+            createReminderRequest.UserDestination = new Guid("0195fcb3-191a-7051-8d9b-88d23c189f8b"); //Test User Destination
+
             var reminder = createReminderRequest.Adapt<Reminder>();
 
-            _repositoryManager.Reminder.Create(reminder);
+            reminder.CreationTime = DateTime.UtcNow;
+            reminder.UserId = new Guid("0195fcb2-1a3a-7920-918d-fcced7f13d2a"); //Test UserId
 
-            try
-            {
-                await _repositoryManager.SaveAsyn();
-            }
-            catch(Exception ex)
-            {
-                throw new ArgumentException();
-            }
-            
+            _repositoryManager.Reminder.Create(reminder);
+             await _repositoryManager.SaveAsync();
         }
-    }
+    }   
 }

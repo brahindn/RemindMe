@@ -49,7 +49,7 @@ namespace RemindMe.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reminders");
+                    b.ToTable("Reminders", (string)null);
                 });
 
             modelBuilder.Entity("RemindMe.Domain.Entities.User", b =>
@@ -87,7 +87,7 @@ namespace RemindMe.Infrastructure.Persistence.Migrations
                     b.HasIndex("PhoneNumber")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("RemindMe.Domain.Entities.Reminder", b =>
