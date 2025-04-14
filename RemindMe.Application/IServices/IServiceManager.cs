@@ -4,5 +4,6 @@
     {
         IUserService UserService { get; }
         IReminderService ReminderService { get; }
+        IMongoService MongoService { get; }
     }
 }

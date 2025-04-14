@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using RemindMe.Application.IServices;
 using RemindMe.Contracts.Requests;
 
@@ -9,18 +10,22 @@ namespace RemindMe.WebApi.Controllers
     public class ReminderController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
+        private readonly Serilog.ILogger _logger;
 
-        public ReminderController(IServiceManager serviceManager)
+        public ReminderController(IServiceManager serviceManager, Serilog.ILogger logger)
         {
             _serviceManager = serviceManager;
+            _logger = logger;
         }
 
         [HttpPost("create-new-reminder")]
-        public Task<IActionResult> CreateNewUser([FromBody] CreateReminderRequest reminder)
+        public async Task<IActionResult> CreateNewReminder([FromBody] CreateReminderRequest reminder)
         {
-            _serviceManager.ReminderService.CreateReminderAsync(reminder);
+            await _serviceManager.ReminderService.CreateReminderAsync(reminder);
 
-            return Task.FromResult<IActionResult>(Ok());
+            _logger.Information($"The reminder created: {reminder.Message}");
+
+            return Ok();
         }
     }
 }

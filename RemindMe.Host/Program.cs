@@ -4,6 +4,8 @@ using RemindMe.Application.IServices;
 using RemindMe.Infrastructure.Persistence;
 using RemindMe.Infrastructure.Persistence.Repositories;
 using RemindMe.Infrastructure.Persistence.Services;
+using Serilog;
+using ILogger = Serilog.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +13,15 @@ builder.Configuration
     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
     .AddJsonFile("appsettings.json");
 
+var loggerConfiguration = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.MongoDB(databaseUrl: builder.Configuration.GetConnectionString("MongoDbConnection"), collectionName: "RemindMeLogs")
+    .CreateLogger();
+
 builder.Services.AddDbContext<RepositoryContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("postgreSqlConnection")));
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
+builder.Services.AddSingleton<ILogger>(loggerConfiguration); ;
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
