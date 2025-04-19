@@ -18,7 +18,7 @@ var loggerConfiguration = new LoggerConfiguration()
     .WriteTo.MongoDB(databaseUrl: builder.Configuration.GetConnectionString("MongoDbConnection"), collectionName: "RemindMeLogs")
     .CreateLogger();
 
-builder.Services.AddDbContext<RepositoryContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("postgreSqlConnection")));
+builder.Services.AddDbContext<RepositoryContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSqlConnection")));
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddSingleton<ILogger>(loggerConfiguration); ;
