@@ -21,6 +21,8 @@ namespace RemindMe.WebApi.Controllers
         }
 
         [HttpPost("create-new-reminder")]
+        [ProducesResponseType(typeof(OkObjectResult), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(BadRequestObjectResult), (int) HttpStatusCode.BadRequest)]
         public async Task<IActionResult> CreateNewReminder([FromBody] CreateReminderRequest reminder)
         {
             await _serviceManager.ReminderService.CreateReminderAsync(reminder);
