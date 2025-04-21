@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using RemindMe.Domain.Entities;
 using RemindMe.Infrastructure.Persistence.ReminderConfigurations;
 
 namespace RemindMe.Infrastructure.Persistence
 {
-    public class RepositoryContext : DbContext
+    public class RepositoryContext : IdentityDbContext<User>
     {
         public RepositoryContext(DbContextOptions<RepositoryContext> options) : base(options)
         {
@@ -15,8 +16,11 @@ namespace RemindMe.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfiguration(new ReminderConfiguration());
+
+            modelBuilder.HasDefaultSchema("identity");
         }
     }
 }

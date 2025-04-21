@@ -27,7 +27,7 @@ namespace RemindMe.Infrastructure.Persistence.Services
             var reminder = createReminderRequest.Adapt<Reminder>();
 
             reminder.CreatedAt = DateTime.UtcNow;
-            reminder.UserId = new Guid("0195fcb2-1a3a-7920-918d-fcced7f13d2a"); //Test UserId
+            reminder.UserId = "0195fcb2-1a3a-7920-918d-fcced7f13d2a"; //Test UserId
 
             _repositoryManager.Reminder.Create(reminder);
              await _repositoryManager.SaveAsync();
