@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "RemindMe.Host\\RemindMe.Host.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "RemindMe.Blazor\\RemindMe.Blazor.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

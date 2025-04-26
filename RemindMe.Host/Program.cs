@@ -24,6 +24,9 @@ builder.Services.AddDbContext<RepositoryContext>(options => options.UseNpgsql(bu
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddSingleton<ILogger>(loggerConfiguration);
+
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
         
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme)
@@ -49,6 +52,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+app.UseAuthorization();
 
 app.MapControllers();
 

@@ -1,0 +1,85 @@
+﻿@page "/"
+@inherits LayoutComponentBase
+
+<MudContainer MaxWidth="MaxWidth.Medium">
+    <MudPaper Height="100px" Width="100%" Class="mud-theme-primary">
+        <MudStack Spacing="3" Justify="Justify.Center" Align="Center">
+            <h3>Welcome!</h3>
+        </MudStack>
+    </MudPaper>
+
+    <MudPaper Elevation="2" Class="mud-theme-secondary" Style="padding: 16px; width:30%;  margin:auto; position:center; border: 2px solid red;">
+        <MudStack Spacing="2" Justify="Justify.Center" Align="Center">
+            <MudPaper>
+                <div class="form-group">
+                    <label class="custom-label">Login</label>
+                    <MudTextField @bind-Value="Email" Variant="Variant.Text" />
+                </div>
+                <div class="form-group">
+                    <label class="custom-label">Password</label>
+                    <MudTextField @bind-Value="Password" Variant="Variant.Text" />
+                </div>  
+                <MudButton>Log In</MudButton>
+            </MudPaper>
+            <MudPaper>
+                <MudText>or</MudText>
+            </MudPaper>
+            <MudPaper>
+                <MudStack>
+                    <MudButton OnClick="@OpenRegisterPart">@(_expanded ? "Register" : "Who are you?")</MudButton>
+                    <MudDivider/>
+                    <MudCollapse Expanded="@_expanded">
+                        <MudForm @ref="_form" @bind-IsValid="@success">
+                            <div class="form-group">
+                                <label class="custom-label">Email</label>
+                                <MudTextField T="string" Required="true"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="custom-label">Password</label>
+                                <MudTextField T="string" Required="true" />
+                            </div>
+                            <div class="form-group">
+                                <label class="custom-label">Phone</label>
+                                <MudTextField T="string" Required="true" />
+                            </div>
+                        </MudForm>
+                    </MudCollapse>
+                </MudStack>
+            </MudPaper>
+        </MudStack>
+    </MudPaper>
+</MudContainer>
+
+<style>
+    .form-group
+    {
+    display:flex;
+    align-items: center;
+    margin-bottom: 10px;
+    }
+
+    .custom-label 
+    {
+    margin-right: 10px;
+    width: 100px;
+    text-align: right;
+    }
+</style>
+
+@code
+{
+    bool success;
+    MudForm _form;
+        
+    public string Email { get; set; }
+    public string Password { get; set; }
+
+    bool _expanded = true;
+
+    private void OpenRegisterPart()
+    {
+        _expanded = !_expanded;
+    }
+}
+
+
