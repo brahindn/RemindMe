@@ -1,26 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
-@code
-{
-    MudTheme _myCustomTheme = new MudTheme()
-        {
-            PaletteLight = new PaletteLight()
-            {
-                Primary = Colors.LightBlue.Default,
-                Secondary = Colors.LightBlue.Accent1
-            }
-        };
-        
-    bool _drawerOpen = true;
-
-    void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
-}
-
 <MudLayout>
-    <MudThemeProvider IsDarkMode="true" />
+    <MudThemeProvider/>
     <MudDialogProvider />
     <MudSnackbarProvider />
 

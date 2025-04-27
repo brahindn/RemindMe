@@ -1,9 +1,24 @@
 ﻿@page "/registration"
+@inherits LayoutComponentBase
 
-<MudContainer With>
-
+<MudContainer Style="height:100vh; display:flex; justify-content: center" class="position-relative">
+    <MudForm Style="align-content:center" @ref="_form" @bind-IsValid="@success">
+        <div class="form-group">
+            <label class="custom-label">Email</label>
+            <MudTextField T="string" Required="true" />
+        </div>
+        <div class="form-group">
+            <label class="custom-label">Password</label>
+            <MudTextField T="string" Required="true" />
+        </div>
+        <div class="form-group">
+            <label class="custom-label">Phone</label>
+            <MudTextField T="string" Required="true" />
+        </div>
+    </MudForm>
 </MudContainer>
 
 @code {
-
+    bool success;
+    MudForm _form;
 }
