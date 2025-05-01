@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Infrastructure", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Infrastructure.Persistence", "RemindMe.Infrastructure.Persistence\RemindMe.Infrastructure.Persistence.csproj", "{D0BD674E-64B9-4D45-9CD7-1394914D3621}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Blazor", "RemindMe.Blazor\RemindMe.Blazor.csproj", "{B5B1E1DC-3C13-42EE-8663-500EF18F43A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindMe.Blazor", "RemindMe.Blazor\RemindMe.Blazor.csproj", "{6480E7A2-7D79-4409-B7F1-5EB8E0B8D4F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +53,10 @@ Global
 		{D0BD674E-64B9-4D45-9CD7-1394914D3621}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0BD674E-64B9-4D45-9CD7-1394914D3621}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0BD674E-64B9-4D45-9CD7-1394914D3621}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B5B1E1DC-3C13-42EE-8663-500EF18F43A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5B1E1DC-3C13-42EE-8663-500EF18F43A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5B1E1DC-3C13-42EE-8663-500EF18F43A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5B1E1DC-3C13-42EE-8663-500EF18F43A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6480E7A2-7D79-4409-B7F1-5EB8E0B8D4F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6480E7A2-7D79-4409-B7F1-5EB8E0B8D4F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6480E7A2-7D79-4409-B7F1-5EB8E0B8D4F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6480E7A2-7D79-4409-B7F1-5EB8E0B8D4F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

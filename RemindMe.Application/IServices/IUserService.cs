@@ -4,5 +4,6 @@ namespace RemindMe.Application.IServices
 {
     public interface IUserService
     {
+        Task RegisterUserAsync(RegisterUserRequest user);
     }
 }

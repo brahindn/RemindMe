@@ -1,66 +1,7 @@
 ﻿@page "/"
-@inherits LayoutComponentBase
 
-<MudContainer Style="height:100vh; width:100vh display:flex; justify-content: center; background-image:url(home_pink_background.jpg); background-size:cover" class="position-relative">
-    <MudPaper Class="centered-element">
-        <MudStack Spacing="2" Justify="Justify.Center" Align="Center">
-            <MudText Typo=Typo.h1 style="color:white">Welcome!</MudText>
-            <div class="form-group">
-                <label class="custom-label">Login</label>
-                <MudTextField @bind-Value="Email" Variant="Variant.Text" />
-            </div>
-            <div class="form-group">
-                <label class="custom-label">Password</label>
-                <MudTextField @bind-Value="Password" Variant="Variant.Text" />
-            </div>
-            <MudButton Style="width:20%; margin:0 auto">Log In</MudButton>
-            <MudLink style="color:white">Forgot your password?</MudLink>
-            <MudLink style="color:white" Href="/registration">Register new account</MudLink>
-        </MudStack>
-    </MudPaper>
-</MudContainer>
+<PageTitle>Home</PageTitle>
 
-<style>
-    .centered-element
-    {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 30%
-    }
-    .form-group
-    {
-    display:flex;
-    align-items: center;
-    margin-bottom: 10px;
-    }
+<h1>Hello, world!</h1>
 
-    .custom-label 
-    {
-    color:white;
-    margin-right: 10px;
-    width: 100px;
-    text-align: right;
-    }
-    .mud-collapse-content
-    {
-        overflow: hidden;
-        transition: height 0.3s ease;
-    }
-    .properties-button
-    {
-        width: 20%;
-        display: block;
-        margin: 0 auto;
-    }
-</style>
-
-@code
-{
-        
-    public string Email { get; set; }
-    public string Password { get; set; }
-}
-
-
+Welcome to your new app.
