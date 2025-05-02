@@ -8,7 +8,7 @@ namespace RemindMe.Contracts.Requests
         [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -16,12 +16,12 @@ namespace RemindMe.Contracts.Requests
         [Phone]
         public string PhoneNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password is required")]
         [StringLength(30, ErrorMessage = "Password must be at least 8 characters long.", MinimumLength = 8)]
         public string Password { get; set; }
 
         [Required]
-        [Compare(nameof(Password))]
-        public string Password2 { get; set; }
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match")]
+        public string ConfirmPassword { get; set; }
     }
 }

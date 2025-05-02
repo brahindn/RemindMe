@@ -29,12 +29,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
         
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme)
-    .AddBearerToken(IdentityConstants.BearerScheme);
 
-builder.Services.AddIdentityCore<User>()
-    .AddEntityFrameworkStores<RepositoryContext>()
-    .AddApiEndpoints();
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<RepositoryContext>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -52,10 +49,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapIdentityApi<User>();
 
 app.Run();
