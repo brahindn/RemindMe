@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RemindMe.Application.IServices;
@@ -21,6 +22,7 @@ namespace RemindMe.WebApi.Controllers
         }
 
         [HttpPost("create-new-reminder")]
+        [Authorize]
         [ProducesResponseType(typeof(OkObjectResult), (int) HttpStatusCode.OK)]
         [ProducesResponseType(typeof(BadRequestObjectResult), (int) HttpStatusCode.BadRequest)]
         public async Task<IActionResult> CreateNewReminder([FromBody] CreateReminderRequest reminder)

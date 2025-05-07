@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using RemindMe.Domain.Entities;
 using RemindMe.Infrastructure.Persistence.ReminderConfigurations;
+using RemindMe.Infrastructure.Persistence.Repositories.Configuration;
 
 namespace RemindMe.Infrastructure.Persistence
 {
@@ -19,6 +20,7 @@ namespace RemindMe.Infrastructure.Persistence
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new ReminderConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
             modelBuilder.HasDefaultSchema("identity");
         }

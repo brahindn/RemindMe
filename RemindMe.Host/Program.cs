@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RemindMe.Application.IRepositories;
 using RemindMe.Application.IServices;
 using RemindMe.Domain.Entities;
+using RemindMe.Host.ServiceExtensions;
 using RemindMe.Infrastructure.Persistence;
 using RemindMe.Infrastructure.Persistence.Repositories;
 using RemindMe.Infrastructure.Persistence.Services;
@@ -27,6 +29,11 @@ builder.Services.AddSingleton<ILogger>(loggerConfiguration);
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+builder.Services.AddAuthentication();
+builder.Services.ConfigureCors();
+builder.Services.ConfigureIdentity();
+builder.Services.ConfigureJWT(builder.Configuration);
         
 builder.Services.AddAuthorization();
 
@@ -41,14 +48,25 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseHsts();
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseHsts();
+}
 
-app.UseHttpsRedirection();
+    app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.All
+});
+app.UseCors("CorsPolicy");
+
+
 app.UseAuthentication();
 app.UseAuthorization();
 
