@@ -4,18 +4,21 @@ using Mapster;
 using RemindMe.Contracts.Requests;
 using RemindMe.Domain.Entities;
 using RemindMe.Contracts.Responses;
+using RemindMe.Application.IServices;
 
 namespace RemindMe.WebApi.Controllers.UserControllers
 {
-    [Route("/api/accounts")]
+    [Route("/api/authentication")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class AuthenticationController : ControllerBase
     {
+        private readonly IServiceManager _serviceManager;
         private readonly UserManager<User> _userManager;
         private readonly Serilog.ILogger _logger;
 
-        public AccountController(UserManager<User> userManager, Serilog.ILogger logger)
+        public AuthenticationController(IServiceManager serviceManager, UserManager<User> userManager, Serilog.ILogger logger)
         {
+            _serviceManager = serviceManager;
             _userManager = userManager;
             _logger = logger;
         }
@@ -38,7 +41,20 @@ namespace RemindMe.WebApi.Controllers.UserControllers
                 return BadRequest(new RegistrationResponsesDto { Errors = errors });
             }
 
+            _logger.Information($"New user {user.UserName} was registred.");
+
             return StatusCode(201);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto userForAuthenticationDto)
+        {
+            if (!await _serviceManager.AuthenticationService.ValidateUser(userForAuthenticationDto))
+            {
+                return Unauthorized();
+            }
+
+            return Ok(new { Token = await _serviceManager.AuthenticationService.CreateToken() });
         }
     }
 }

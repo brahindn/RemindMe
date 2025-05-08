@@ -1,22 +1,25 @@
-﻿using RemindMe.Application.IRepositories;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using RemindMe.Application.IRepositories;
 using RemindMe.Application.IServices;
+using RemindMe.Domain.Entities;
 
 namespace RemindMe.Infrastructure.Persistence.Services
 {
     public class ServiceManager : IServiceManager
     {
-        private readonly Lazy<IUserService> _userService;
+        private readonly Lazy<IAuthenticationService> _authenticationService;
         private readonly Lazy<IReminderService> _reminderService;
         private readonly Lazy<IMongoService> _mongoService;
 
-        public ServiceManager(IRepositoryManager repositoryManager)
+        public ServiceManager(IRepositoryManager repositoryManager, UserManager<User> userManager, IConfiguration configuration, Serilog.ILogger logger)
         {
-            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager));
+            _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationService(repositoryManager, userManager, configuration, logger));
             _reminderService = new Lazy<IReminderService>(() => new ReminderService(repositoryManager));
             _mongoService = new Lazy<IMongoService>(() => new MongoService());
         }
 
-        public IUserService UserService => _userService.Value;
+        public IAuthenticationService AuthenticationService => _authenticationService.Value;
         public IReminderService ReminderService => _reminderService.Value;
         public IMongoService MongoService => _mongoService.Value;
     }

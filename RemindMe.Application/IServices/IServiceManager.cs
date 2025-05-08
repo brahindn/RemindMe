@@ -2,7 +2,7 @@
 {
     public interface IServiceManager
     {
-        IUserService UserService { get; }
+        IAuthenticationService AuthenticationService { get; }
         IReminderService ReminderService { get; }
         IMongoService MongoService { get; }
     }

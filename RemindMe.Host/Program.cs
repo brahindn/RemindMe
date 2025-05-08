@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RemindMe.Application.IRepositories;
 using RemindMe.Application.IServices;
-using RemindMe.Domain.Entities;
 using RemindMe.Host.ServiceExtensions;
 using RemindMe.Infrastructure.Persistence;
 using RemindMe.Infrastructure.Persistence.Repositories;
@@ -30,16 +28,11 @@ builder.Services.AddSingleton<ILogger>(loggerConfiguration);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddAuthentication();
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJWT(builder.Configuration);
         
 builder.Services.AddAuthorization();
-
-builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<RepositoryContext>();
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
