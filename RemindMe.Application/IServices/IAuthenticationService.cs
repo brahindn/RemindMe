@@ -1,10 +1,11 @@
-﻿using RemindMe.Contracts.Requests;
+﻿using RemindMe.Contracts.AccessToken;
+using RemindMe.Contracts.Requests;
 
 namespace RemindMe.Application.IServices
 {
     public interface IAuthenticationService
     {
         Task<bool> ValidateUser(UserForAuthenticationDto userForAuth);
-        Task<string> CreateToken();
+        Task<TokenDto> CreateToken(bool populateExp);
     }
 }
