@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using RemindMe.Contracts.AccessToken;
 using System.Text;
+using System.Globalization;
 
 namespace RemindMe.Infrastructure.Persistence.Services
 {
@@ -20,6 +21,7 @@ namespace RemindMe.Infrastructure.Persistence.Services
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
         private readonly Serilog.ILogger _logger;
+        private readonly IConfigurationSection _jwtSettings;
 
         private User? _user;
 
@@ -29,13 +31,15 @@ namespace RemindMe.Infrastructure.Persistence.Services
             _userManager = userManager;
             _configuration = configuration;
             _logger = logger;
+
+            _jwtSettings = _configuration.GetSection("JwtSettings");
         }
 
         public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuth)
         {
             _user = await _userManager.FindByNameAsync(userForAuth.UserName);
 
-            var result = (_user != null && await _userManager.CheckPasswordAsync(_user, userForAuth.Password));
+            var result = _user != null && await _userManager.CheckPasswordAsync(_user, userForAuth.Password);
 
             if(!result)
             {
@@ -49,6 +53,7 @@ namespace RemindMe.Infrastructure.Persistence.Services
         {
             var signingCredentials = GetSigningCredentials(); 
             var claims = await GetClaims(); 
+
             var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
             var refreshToken = GenerateRefreshToken();
 
@@ -68,10 +73,12 @@ namespace RemindMe.Infrastructure.Persistence.Services
 
         private SigningCredentials GetSigningCredentials() 
         {
-            using var hmac = new HMACSHA256();
-            var hmacKey = hmac.Key;
-            var key = Convert.ToBase64String(hmacKey);
-            var secret = new SymmetricSecurityKey(Convert.FromBase64String(key)); 
+            var key = Encoding.UTF8.GetBytes(_jwtSettings["secret"]);
+            var secret = new SymmetricSecurityKey(key)
+            {
+                KeyId = Guid.NewGuid().ToString()
+            };
+
             var signingCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
 
             return signingCredentials;
@@ -97,14 +104,12 @@ namespace RemindMe.Infrastructure.Persistence.Services
 
         private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
         {
-            var jwtSettings = _configuration.GetSection("JwtSettings");
-
             var tokenOptions = new JwtSecurityToken
             (
-                issuer: jwtSettings["validIssuer"],
-                audience: jwtSettings["validAudience"],
+                issuer: _jwtSettings["validIssuer"],
+                audience: _jwtSettings["validAudience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expires"])),
+                expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_jwtSettings["expires"])),
                 signingCredentials: signingCredentials
             );
 
@@ -125,17 +130,15 @@ namespace RemindMe.Infrastructure.Persistence.Services
 
         private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
         {
-            var jwtSettings = _configuration.GetSection("JwtSettings");
-
             var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateAudience = true,
                 ValidateIssuer = true,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRET"))),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings["secret"])),
                 ValidateLifetime = true,
-                ValidIssuer = jwtSettings["validIssuer"],
-                ValidAudience = jwtSettings["validAudience"]
+                ValidIssuer = _jwtSettings["validIssuer"],
+                ValidAudience = _jwtSettings["validAudience"]
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -150,6 +153,35 @@ namespace RemindMe.Infrastructure.Persistence.Services
             }
 
             return principal;
+        }
+
+        public async Task<TokenDto> RefreshToken(TokenDto tokenDto)
+        {
+            var principal = GetPrincipalFromExpiredToken(tokenDto.accessToken);
+            var user = await _userManager.FindByNameAsync(principal.Identity.Name);
+
+            if(user == null)
+            {
+                _logger.Warning("RefreshToken - User not found");
+
+                throw new UnauthorizedAccessException("User not found");
+            }
+            if(user.RefreshToken != tokenDto.refreshToken)
+            {
+                _logger.Warning("RefreshToken - Invalid refresh token");
+
+                throw new SecurityTokenException("Invalid refresh token");
+            }
+            if(user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+            {
+                _logger.Warning("RefreshToken - Refresh token expired");
+
+                throw new SecurityTokenException("Refresh token expired");
+            }
+
+            _user = user;
+
+            return await CreateToken(populateExp: false);
         }
     }
 }
