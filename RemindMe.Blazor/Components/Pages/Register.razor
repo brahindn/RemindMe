@@ -1,33 +1,30 @@
-﻿@page "/register";
+﻿@page "/register"
 
 @rendermode InteractiveServer
 @using RemindMe.Contracts.Requests
 @inject NavigationManager NavigationManager
 @inject HttpClient httpClient
 
-<Mud Class="col-md-4">
-    <EditForm Model="model" OnValidSubmit="OnValidSubmit" FormName="Register">
-        <DataAnnotationsValidator/>
-        <MudSpacer/>
-        <MudItem xs="12" sm="7">
-            <MudCard>
-                <MudCardContent>
-                    <MudTextField Label="First name" HelperText="Max. 8 characters"
-                    @bind-Value="model.UserName" For="@(() => model.UserName)" />
-                    <MudTextField Label="Email" Class="mt-3"
-                    @bind-Value="model.Email" For="@(() => model.Email)" />
-                    <MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3"
-                    @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" />
-                    <MudTextField Label="Password" HelperText="Repeat the password" Class="mt-3"
-                    @bind-Value="model.ConfirmPassword" For="@(() => model.ConfirmPassword)" InputType="InputType.Password" />
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
+
+<MudPaper Class="pa-2" Style="width:40%; height:50%; align-self:center">
+    <EditForm Model="model" OnValidSubmit="OnValidSubmit" FormName="Register" >
+        <DataAnnotationsValidator />
+        <MudStack Style="width: 100%;">
+            <MudText>User name</MudText>
+            <MudTextField Style="margin-right:3px" @bind-Value="model.UserName" For="@(() => model.UserName)" />
+            <MudText>Email</MudText>
+            <MudTextField Class="mt-3" @bind-Value="model.Email" For="@(() => model.Email)" />
+            <MudText>Password</MudText>
+            <MudTextField Class="mt-3" @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" />
+            <MudText>Confirm Password</MudText>
+            <MudTextField Class="mt-3" @bind-Value="model.ConfirmPassword" For="@(() => model.ConfirmPassword)" InputType="InputType.Password" />
+            <MudDivider/>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+        </MudStack>
     </EditForm>
-</Mud>
+</MudPaper>
+    
+       
 
 @code {
 
@@ -37,7 +34,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        const string registerUserControllerUri = "api/user/register-user";
+        const string registerUserControllerUri = "api/authentication/register";
         _registerUser = new Uri(httpClient.BaseAddress!, registerUserControllerUri);
     }
 
