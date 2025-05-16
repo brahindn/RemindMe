@@ -17,7 +17,7 @@ namespace RemindMe.Contracts.Requests
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
-        [StringLength(30, ErrorMessage = "Password must be at least 8 characters long.", MinimumLength = 8)]
+        [StringLength(30, ErrorMessage = "Password must be at least 10 characters long.", MinimumLength = 10)]
         public string Password { get; set; }
 
         [Required]

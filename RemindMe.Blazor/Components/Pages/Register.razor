@@ -6,29 +6,29 @@
 @inject HttpClient httpClient
 
 
-<MudPaper Class="pa-2" Style="width:40%; height:50%; align-self:center">
-    <EditForm Model="model" OnValidSubmit="OnValidSubmit" FormName="Register" >
+<MudPaper Class="pa-2;" Style="width:40%; align-self:center; border: 2px solid lightskyblue; padding: 6px">
+    <EditForm Model="@userRequest" OnValidSubmit="OnValidSubmit" FormName="RegisterForm">
         <DataAnnotationsValidator />
         <MudStack Style="width: 100%;">
-            <MudText>User name</MudText>
-            <MudTextField Style="margin-right:3px" @bind-Value="model.UserName" For="@(() => model.UserName)" />
+            <MudText Class="mud-text">User name</MudText>
+            <MudTextField Class="mud-text-field" @bind-Value="userRequest.UserName" For="@(() => userRequest.UserName)" />
             <MudText>Email</MudText>
-            <MudTextField Class="mt-3" @bind-Value="model.Email" For="@(() => model.Email)" />
+            <MudTextField Class="mud-text-field" @bind-Value="userRequest.Email" For="@(() => userRequest.Email)" />
+            <MudText>Phone </MudText>
+            <MudTextField Class="mud-text-field" @bind-Value="userRequest.PhoneNumber" For="@(() => userRequest.PhoneNumber)" />
             <MudText>Password</MudText>
-            <MudTextField Class="mt-3" @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" />
+            <MudTextField Class="mud-text-field" @bind-Value="userRequest.Password" For="@(() => userRequest.Password)" InputType="InputType.Password" />
             <MudText>Confirm Password</MudText>
-            <MudTextField Class="mt-3" @bind-Value="model.ConfirmPassword" For="@(() => model.ConfirmPassword)" InputType="InputType.Password" />
+            <MudTextField Class="mud-text-field" @bind-Value="userRequest.ConfirmPassword" For="@(() => userRequest.ConfirmPassword)" InputType="InputType.Password" />
             <MudDivider/>
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" Class="ml-auto" Style="margin: auto">Register</MudButton>
         </MudStack>
     </EditForm>
 </MudPaper>
-    
-       
+
 
 @code {
-
-    private RegisterUserRequest model = new RegisterUserRequest();
+    private RegisterUserRequest userRequest = new RegisterUserRequest();
     bool success;
     private Uri? _registerUser;
 
@@ -46,12 +46,25 @@
             return;
         }
 
-        var response = await httpClient.PostAsJsonAsync(_registerUser, model);
+        var response = await httpClient.PostAsJsonAsync(_registerUser, userRequest);
+
+        if(response.IsSuccessStatusCode)
+        {
+            userRequest = new RegisterUserRequest();
+            success = false;
+            StateHasChanged();
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/error");
+        }
     }
 
-    private void OnValidSubmit(EditContext context)
+    private async void OnValidSubmit(EditContext context)
     {
         success = true;
+        await RegisterUser();
+
         StateHasChanged();
     }
 }

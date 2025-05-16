@@ -49,3 +49,13 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+
+.mud-text-field {
+    background-color: lightskyblue;
+    margin-top: 2px;
+}
+
+.mud-text{
+    margin-bottom: 2px;
+}
+
