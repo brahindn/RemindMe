@@ -5,23 +5,21 @@
 @inject NavigationManager NavigationManager
 @inject HttpClient httpClient
 
-
-<MudPaper Class="pa-2;" Style="width:40%; align-self:center; border: 2px solid lightskyblue; padding: 6px">
+<MudPaper Class="pa-2;" Elevation="0" Style="width:60vh; height:contain; align-self:center; overflow:hidden; padding: 6px">
     <EditForm Model="@userRequest" OnValidSubmit="OnValidSubmit" FormName="RegisterForm">
         <DataAnnotationsValidator />
-        <MudStack Style="width: 100%;">
-            <MudText Class="mud-text">User name</MudText>
-            <MudTextField Class="mud-text-field" @bind-Value="userRequest.UserName" For="@(() => userRequest.UserName)" />
-            <MudText>Email</MudText>
-            <MudTextField Class="mud-text-field" @bind-Value="userRequest.Email" For="@(() => userRequest.Email)" />
-            <MudText>Phone </MudText>
-            <MudTextField Class="mud-text-field" @bind-Value="userRequest.PhoneNumber" For="@(() => userRequest.PhoneNumber)" />
-            <MudText>Password</MudText>
-            <MudTextField Class="mud-text-field" @bind-Value="userRequest.Password" For="@(() => userRequest.Password)" InputType="InputType.Password" />
-            <MudText>Confirm Password</MudText>
-            <MudTextField Class="mud-text-field" @bind-Value="userRequest.ConfirmPassword" For="@(() => userRequest.ConfirmPassword)" InputType="InputType.Password" />
-            <MudDivider/>
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" Class="ml-auto" Style="margin: auto">Register</MudButton>
+        <MudStack Style="height: 100%;">
+            <MudButton Variant="Variant.Outlined" Color="Color.Default" Class="ml-auto" Style="margin: auto; text-transform:initial;">
+                <MudIcon Icon="@Icons.Custom.Brands.Google"/>&nbsp; Sign In by Google
+                </MudButton>
+                <MudText Style="margin:auto">or</MudText>
+            <MudTextField Label="User Name" @bind-Value="userRequest.UserName" For="@(() => userRequest.UserName)" Variant="Variant.Outlined" />
+            <MudTextField Label="Email" @bind-Value="userRequest.Email" For="@(() => userRequest.Email)" Variant="Variant.Outlined" />
+            <MudTextField Mask="@(new PatternMask("000-000-00-00"))" Label="Phone number in format: 099-***-**-**" Variant="Variant.Outlined"
+            Class="justify-content-center" @bind-Value="userRequest.PhoneNumber" For="@(() => userRequest.PhoneNumber)" />
+            <MudTextField Label="Enter new password" @bind-Value="userRequest.Password" For="@(() => userRequest.Password)" InputType="InputType.Password" Variant="Variant.Outlined" />
+            <MudTextField Label="Confirm a password" @bind-Value="userRequest.ConfirmPassword" For="@(() => userRequest.ConfirmPassword)" InputType="InputType.Password" Variant="Variant.Outlined" />
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" Style="margin:auto; text-transform:capitalize">Register</MudButton>
         </MudStack>
     </EditForm>
 </MudPaper>
