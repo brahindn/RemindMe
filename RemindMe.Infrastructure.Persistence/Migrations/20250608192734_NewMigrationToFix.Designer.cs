@@ -9,11 +9,11 @@ using RemindMe.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace RemindMe.Application.Persistence.Migrations
+namespace RemindMe.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20250502161504_IdentityTablesCreation")]
-    partial class IdentityTablesCreation
+    [Migration("20250608192734_NewMigrationToFix")]
+    partial class NewMigrationToFix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,22 @@ namespace RemindMe.Application.Persistence.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", "identity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "5301bb12-cf21-4d25-924d-3aacae3f4d4a",
+                            ConcurrencyStamp = "5a32cbdc-da7a-ebfa-deaf-53df4ee326e0",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "0936f344-48dc-42a9-b44e-9957fa530b80",
+                            ConcurrencyStamp = "f6ea9ea8-3c3d-6f7f-c2d6-cba77fa5393d",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -253,6 +269,12 @@ namespace RemindMe.Application.Persistence.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");

@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace RemindMe.Application.Persistence.Migrations
+namespace RemindMe.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class CreatingIdentityTables : Migration
+    public partial class NewMigrationToFix : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

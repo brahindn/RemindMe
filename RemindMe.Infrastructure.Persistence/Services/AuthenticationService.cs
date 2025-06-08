@@ -132,13 +132,13 @@ namespace RemindMe.Infrastructure.Persistence.Services
         {
             var tokenValidationParameters = new TokenValidationParameters
             {
-                ValidateAudience = true,
+                ValidateAudience = false,    //We turned off this
                 ValidateIssuer = true,
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings["secret"])),
-                ValidateLifetime = true,
+                ValidateLifetime = false,   //We turned off this
                 ValidIssuer = _jwtSettings["validIssuer"],
-                ValidAudience = _jwtSettings["validAudience"]
+                ValidAudiences = new[] { _jwtSettings["validAudience"] }
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
