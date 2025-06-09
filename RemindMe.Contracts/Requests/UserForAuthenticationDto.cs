@@ -4,10 +4,8 @@ namespace RemindMe.Contracts.Requests
 {
     public class UserForAuthenticationDto
     {
-        [Required(ErrorMessage = "User name is requared")]
-        public string? UserName { get; init; }
+        public string? UserName { get; set; }
 
-        [Required(ErrorMessage = "Password is requared")]
-        public string? Password { get; init; }
+        public string? Password { get; set; }
     }
 }

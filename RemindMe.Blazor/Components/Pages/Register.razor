@@ -13,13 +13,13 @@
                 <MudIcon Icon="@Icons.Custom.Brands.Google"/>&nbsp; Sign In by Google
                 </MudButton>
                 <MudText Style="margin:auto">or</MudText>
-            <MudTextField Label="User Name" @bind-Value="userRequest.UserName" For="@(() => userRequest.UserName)" Variant="Variant.Outlined" />
-            <MudTextField Label="Email" @bind-Value="userRequest.Email" For="@(() => userRequest.Email)" Variant="Variant.Outlined" />
-            <MudTextField Mask="@(new PatternMask("000-000-00-00"))" Label="Phone number in format: 099-***-**-**" Variant="Variant.Outlined"
+            <MudTextField Label="USER NAME" @bind-Value="userRequest.UserName" For="@(() => userRequest.UserName)" Variant="Variant.Outlined" />
+            <MudTextField Label="E-MAIL" @bind-Value="userRequest.Email" For="@(() => userRequest.Email)" Variant="Variant.Outlined" />
+            <MudTextField Mask="@(new PatternMask("000-000-00-00"))" Label="PHONE NUMBER IN FORMAT: 099-***-**-**" Variant="Variant.Outlined"
             Class="justify-content-center" @bind-Value="userRequest.PhoneNumber" For="@(() => userRequest.PhoneNumber)" />
-            <MudTextField Label="Enter new password" @bind-Value="userRequest.Password" For="@(() => userRequest.Password)" InputType="InputType.Password" Variant="Variant.Outlined" />
-            <MudTextField Label="Confirm a password" @bind-Value="userRequest.ConfirmPassword" For="@(() => userRequest.ConfirmPassword)" InputType="InputType.Password" Variant="Variant.Outlined" />
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" Style="margin:auto; text-transform:capitalize">Register</MudButton>
+            <MudTextField Label="PASSWORD" @bind-Value="userRequest.Password" For="@(() => userRequest.Password)" InputType="InputType.Password" Variant="Variant.Outlined" />
+            <MudTextField Label="CONFIRM A PASSWORD" @bind-Value="userRequest.ConfirmPassword" For="@(() => userRequest.ConfirmPassword)" InputType="InputType.Password" Variant="Variant.Outlined" />
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Info" Style="margin:auto; text-transform:capitalize">Register</MudButton>
         </MudStack>
     </EditForm>
 </MudPaper>

@@ -1,0 +1,65 @@
+﻿@page "/login"
+
+@rendermode InteractiveServer
+@using RemindMe.Contracts.Requests
+@inject NavigationManager NavigationManager
+@inject HttpClient httpClient
+
+<MudPaper Class="pa-2;" Elevation="0" Style="width:60vh; height:contain; align-self:center; overflow:hidden; padding: 6px">
+    <MudForm Model="@userForAuthenticationDto" OnValidSubmit="OnValidSubmit" FormName="LoginForm">
+        <MudStack Style="height: 100%;">
+            <MudButton Variant="Variant.Outlined" Color="Color.Default" Class="ml-auto" Style="margin: auto; text-transform:initial;">
+                <MudIcon Icon="@Icons.Custom.Brands.Google" />&nbsp; Sign In by Google
+            </MudButton>
+            <MudText Style="margin:auto">or</MudText>
+            <MudTextField Label="USER NAME" @bind-Value="userForAuthenticationDto.UserName" For="@(() => userForAuthenticationDto.UserName)" Variant="Variant.Outlined" />
+            <MudTextField Label="PASSWORD" @bind-Value="userForAuthenticationDto.Password" For="@(() => userForAuthenticationDto.Password)" InputType="InputType.Password" Variant="Variant.Outlined" />
+            <MudGrid Style="height: 100%; display: flex; flex-direction: column;">
+                <MudItem xs="12" class="d-flex justify-center mt-auto">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Info" Style="text-transform:capitalize">Login</MudButton>
+                    <MudLink Href="#" Underline="Underline.Always" Style="margin-left: 16px;">Forgot password</MudLink>
+                </MudItem>
+            </MudGrid>
+        </MudStack>
+    </MudForm>
+</MudPaper>
+
+
+
+@code {
+    UserForAuthenticationDto userForAuthenticationDto = new UserForAuthenticationDto();
+    bool success;
+    private Uri? _loginUser;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        const string loginUserControllerUri = "api/authentication/login";
+        _loginUser = new Uri(httpClient.BaseAddress!, loginUserControllerUri);
+    }
+
+    private async Task LoginUser()
+    {
+        if(!success)
+        {
+            return;
+        }
+
+        var response = await httpClient.PutAsJsonAsync(_loginUser, userForAuthenticationDto);
+
+        if(response.IsSuccessStatusCode)
+        {
+            userForAuthenticationDto = new UserForAuthenticationDto();
+            success = false;
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+    private async void OnValidSubmit(EditContext context)
+    {
+        success = true;
+        await LoginUser();
+
+        StateHasChanged();
+    }
+}
