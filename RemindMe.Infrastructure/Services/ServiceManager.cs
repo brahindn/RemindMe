@@ -4,7 +4,7 @@ using RemindMe.Application.IRepositories;
 using RemindMe.Application.IServices;
 using RemindMe.Domain.Entities;
 
-namespace RemindMe.Infrastructure.Persistence.Services
+namespace RemindMe.Infrastructure.Services
 {
     public class ServiceManager : IServiceManager
     {

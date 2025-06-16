@@ -13,7 +13,7 @@ using RemindMe.Contracts.AccessToken;
 using System.Text;
 using System.Globalization;
 
-namespace RemindMe.Infrastructure.Persistence.Services
+namespace RemindMe.Infrastructure.Services
 {
     public class AuthenticationService : IAuthenticationService
     {

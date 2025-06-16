@@ -4,7 +4,7 @@ using RemindMe.Application.IServices;
 using RemindMe.Contracts.Requests;
 using RemindMe.Domain.Entities;
 
-namespace RemindMe.Infrastructure.Persistence.Services
+namespace RemindMe.Infrastructure.Services
 {
     public class ReminderService : IReminderService
     {

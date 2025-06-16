@@ -2,7 +2,7 @@
 using MongoDB.Driver;
 using RemindMe.Application.IServices;
 
-namespace RemindMe.Infrastructure.Persistence.Services
+namespace RemindMe.Infrastructure.Services
 {
     public class MongoService : IMongoService
     {

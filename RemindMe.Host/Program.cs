@@ -5,7 +5,7 @@ using RemindMe.Application.IServices;
 using RemindMe.Host.ServiceExtensions;
 using RemindMe.Infrastructure.Persistence;
 using RemindMe.Infrastructure.Persistence.Repositories;
-using RemindMe.Infrastructure.Persistence.Services;
+using RemindMe.Infrastructure.Services;
 using Serilog;
 using ILogger = Serilog.ILogger;
 
