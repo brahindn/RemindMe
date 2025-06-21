@@ -15,5 +15,15 @@ namespace RemindMe.Infrastructure.Persistence.Repositories
         {
             _repositoryContext.Set<T>().Add(entity);
         }
+
+        public void Update(T entity)
+        {
+            _repositoryContext.Set<T>().Update(entity);
+        }
+
+        public void Delete(T entity)
+        {
+            _repositoryContext.Set<T>().Remove(entity);
+        }
     }
 }

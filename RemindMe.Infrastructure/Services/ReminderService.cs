@@ -17,7 +17,15 @@ namespace RemindMe.Infrastructure.Services
 
         public async Task CreateReminderAsync(CreateReminderRequest createReminderRequest)
         {
-            
+            if (createReminderRequest == null)
+            {
+                return;
+            }
+
+            var newReminder = createReminderRequest.Adapt<Reminder>();
+
+            _repositoryManager.Reminder.Create(newReminder);
+            await _repositoryManager.SaveAsync();
         }
     }   
 }
