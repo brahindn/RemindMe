@@ -2,19 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using RemindMe.Application.IServices;
 using RemindMe.Contracts.Requests;
-using RemindMe.Contracts.Responses;
-using RemindMe.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace RemindMe.WebApi.Controllers.ReminderControllers
 {
     [Route("api/createReminder")]
     [ApiController]
+    [Authorize]
     public class CreateReminderController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
@@ -26,29 +21,37 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
             _logger = logger;
         }
 
-        [HttpPost("create-new-reminder")]
-        [Authorize]
-        [ProducesResponseType(typeof(OkObjectResult), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(BadRequestObjectResult), (int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> CreateNewReminder()
-        {
-            var newReminderRequest = new CreateReminderRequest()
+
+        
+        //[ProducesResponseType(typeof(OkObjectResult), (int)HttpStatusCode.OK)]
+        //[ProducesResponseType(typeof(BadRequestObjectResult), (int)HttpStatusCode.BadRequest)]
+        [HttpPost("createNewReminder")]
+        public async Task<IActionResult> CreateNewReminder([FromBody] CreateReminderRequest newReminderRequest)
+        { 
+            if(newReminderRequest == null)
             {
-                UserId = new Guid("9a585e08-9397-47cc-b429-963cb865ece0"),
-                Title = "Test reminder 20.06.2025",
-                Message = "Test reminder message",
-                CreatedAt = DateTime.Now,
-                ScheduledAt = new DateTime(2025, 6, 30),
-                UserDestination = new Guid("9a585e08-9397-47cc-b429-963cb865ece0")
-            };
+                return BadRequest();
+            }
 
             try
             {
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+                if(userIdClaim == null)
+                {
+                    return Unauthorized();
+                }
+
+                newReminderRequest.UserId = userIdClaim.Value;
+
                 await _serviceManager.ReminderService.CreateReminderAsync(newReminderRequest);
+
+                _logger.Information("A reminder was created!");
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, "An error during creating of reminder");
+
                 return BadRequest();
             }
 

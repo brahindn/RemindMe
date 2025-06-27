@@ -9,10 +9,9 @@ namespace RemindMe.Contracts.Requests
         public string? Message { get; set; }
         public DateTime ScheduledAt { get; set; }
         public string TargetType { get; set; } = "email";
-        public DateTime CreatedAt { get; set; } //Unavailable property for User
-        public DateTime? UpdatedAt { get; set; } //Unavailable property for User
-        public DateTime? SentAt { get; set; }
-        public Guid UserId { get; set; }
+
+        [JsonIgnore]
+        public string UserId { get; set; }
         public Guid UserDestination { get; set; }
     }
 }
