@@ -14,7 +14,7 @@ namespace RemindMe.Infrastructure.Services
 
         public ServiceManager(IRepositoryManager repositoryManager, UserManager<User> userManager, IConfiguration configuration, Serilog.ILogger logger)
         {
-            _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationService(repositoryManager, userManager, configuration, logger));
+            _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationService(userManager, configuration, logger));
             _reminderService = new Lazy<IReminderService>(() => new ReminderService(repositoryManager));
             _mongoService = new Lazy<IMongoService>(() => new MongoService());
         }

@@ -1,7 +1,5 @@
-﻿using Mapster;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-using RemindMe.Application.IRepositories;
 using RemindMe.Application.IServices;
 using RemindMe.Contracts.Requests;
 using RemindMe.Domain.Entities;
@@ -11,13 +9,11 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using RemindMe.Contracts.AccessToken;
 using System.Text;
-using System.Globalization;
 
 namespace RemindMe.Infrastructure.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly IRepositoryManager _repositoryManager;
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
         private readonly Serilog.ILogger _logger;
@@ -25,9 +21,8 @@ namespace RemindMe.Infrastructure.Services
 
         private User? _user;
 
-        public AuthenticationService(IRepositoryManager repositoryManager, UserManager<User> userManager, IConfiguration configuration, Serilog.ILogger logger)
+        public AuthenticationService(UserManager<User> userManager, IConfiguration configuration, Serilog.ILogger logger)
         {
-            _repositoryManager = repositoryManager;
             _userManager = userManager;
             _configuration = configuration;
             _logger = logger;

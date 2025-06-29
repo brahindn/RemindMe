@@ -9,7 +9,6 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
 {
     [Route("api/createReminder")]
     [ApiController]
-    [Authorize]
     public class CreateReminderController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
@@ -22,10 +21,10 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
         }
 
 
-        
+
         //[ProducesResponseType(typeof(OkObjectResult), (int)HttpStatusCode.OK)]
         //[ProducesResponseType(typeof(BadRequestObjectResult), (int)HttpStatusCode.BadRequest)]
-        [HttpPost("createNewReminder")]
+        [HttpPost("createNewReminder"), Authorize]
         public async Task<IActionResult> CreateNewReminder([FromBody] CreateReminderRequest newReminderRequest)
         { 
             if(newReminderRequest == null)
