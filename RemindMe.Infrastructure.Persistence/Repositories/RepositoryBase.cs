@@ -1,4 +1,6 @@
-﻿using RemindMe.Application.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using RemindMe.Application.IRepositories;
+using System.Linq.Expressions;
 
 namespace RemindMe.Infrastructure.Persistence.Repositories
 {
@@ -10,6 +12,12 @@ namespace RemindMe.Infrastructure.Persistence.Repositories
         {
             _repositoryContext = repositoryContext;
         }
+
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
+        {
+            return _repositoryContext.Set<T>().Where(expression);
+        }
+
 
         public void Create(T entity)
         {

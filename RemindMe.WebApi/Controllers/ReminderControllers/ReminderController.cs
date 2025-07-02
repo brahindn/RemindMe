@@ -9,12 +9,12 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
 {
     [Route("api/createReminder")]
     [ApiController]
-    public class CreateReminderController : ControllerBase
+    public class ReminderController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
         private readonly Serilog.ILogger _logger;
 
-        public CreateReminderController(IServiceManager serviceManager, Serilog.ILogger logger  )
+        public ReminderController(IServiceManager serviceManager, Serilog.ILogger logger  )
         {
             _serviceManager = serviceManager;
             _logger = logger;
@@ -55,6 +55,22 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
             }
 
             return Ok();
+        }
+
+        [HttpGet("getReminderById")]
+        public async Task<IActionResult> GetReminder([FromQuery] Guid Id)
+        {
+            var reminder = await _serviceManager.ReminderService.GetReminderAsync(Id);
+
+            return Ok(reminder);
+        }
+
+        [HttpDelete("deleteReminder")]
+        public async Task<IActionResult> DeleteReminder([FromQuery] Guid Id)
+        {
+            await _serviceManager.ReminderService.DeleteReminderAsync(Id);
+
+            return NoContent();
         }
     }
 }
