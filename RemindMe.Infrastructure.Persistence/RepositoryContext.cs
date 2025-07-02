@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using RemindMe.Domain.Entities;
 using RemindMe.Infrastructure.Persistence.ReminderConfigurations;
 using RemindMe.Infrastructure.Persistence.Repositories.Configuration;
+using Microsoft.AspNetCore.Identity;
 
 namespace RemindMe.Infrastructure.Persistence
 {

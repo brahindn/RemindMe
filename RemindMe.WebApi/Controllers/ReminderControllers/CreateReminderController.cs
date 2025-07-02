@@ -24,7 +24,7 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
 
         //[ProducesResponseType(typeof(OkObjectResult), (int)HttpStatusCode.OK)]
         //[ProducesResponseType(typeof(BadRequestObjectResult), (int)HttpStatusCode.BadRequest)]
-        [HttpPost("createNewReminder"), Authorize]
+        [HttpPost("createNewReminder")]
         public async Task<IActionResult> CreateNewReminder([FromBody] CreateReminderRequest newReminderRequest)
         { 
             if(newReminderRequest == null)
@@ -34,14 +34,14 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
 
             try
             {
-                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                /*var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
 
                 if(userIdClaim == null)
                 {
                     return Unauthorized();
                 }
 
-                newReminderRequest.UserId = userIdClaim.Value;
+                newReminderRequest.UserId = userIdClaim.Value;*/
 
                 await _serviceManager.ReminderService.CreateReminderAsync(newReminderRequest);
 

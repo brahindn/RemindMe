@@ -8,10 +8,5 @@ namespace RemindMe.Infrastructure.Persistence.Repositories
         public ReminderRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
-
-        public void Create(Reminder reminder)
-        {
-            Create(reminder);
-        }
     }
 }
