@@ -67,7 +67,7 @@ namespace RemindMe.Infrastructure.Services
 
             if(existingReminder == null)
             {
-                throw new InvalidOperationException("Reminder not found");
+                throw new NullReferenceException($"Reminder not found with Id: {updateReminderRequest.Id}");
             }
 
             updateReminderRequest.Adapt(existingReminder);

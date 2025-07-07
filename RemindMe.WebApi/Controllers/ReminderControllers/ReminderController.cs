@@ -9,6 +9,7 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
 {
     [Route("api/createReminder")]
     [ApiController]
+    [Authorize]
     public class ReminderController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
@@ -20,10 +21,8 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
             _logger = logger;
         }
 
-
-
-        //[ProducesResponseType(typeof(OkObjectResult), (int)HttpStatusCode.OK)]
-        //[ProducesResponseType(typeof(BadRequestObjectResult), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(OkObjectResult), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(BadRequestObjectResult), (int)HttpStatusCode.BadRequest)]
         [HttpPost("createNewReminder")]
         public async Task<IActionResult> CreateNewReminder([FromBody] CreateReminderRequest newReminderRequest)
         { 
@@ -34,14 +33,7 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
 
             try
             {
-                /*var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-
-                if(userIdClaim == null)
-                {
-                    return Unauthorized();
-                }
-
-                newReminderRequest.UserId = userIdClaim.Value;*/
+                GetUserIdFromClaims();
 
                 await _serviceManager.ReminderService.CreateReminderAsync(newReminderRequest);
 
@@ -99,6 +91,13 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
             }
 
             return Ok();
+        }
+
+        private string GetUserIdFromClaims()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            return userIdClaim?.Value ?? throw new UnauthorizedAccessException("User Id claim not found");
         }
     }
 }
