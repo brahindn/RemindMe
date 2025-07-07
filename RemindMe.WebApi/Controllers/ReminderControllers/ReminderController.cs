@@ -62,6 +62,8 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
         {
             var reminder = await _serviceManager.ReminderService.GetReminderAsync(Id);
 
+            _logger.Information("A reminder was got");
+
             return Ok(reminder);
         }
 
@@ -70,7 +72,33 @@ namespace RemindMe.WebApi.Controllers.ReminderControllers
         {
             await _serviceManager.ReminderService.DeleteReminderAsync(Id);
 
+            _logger.Information("A reminder was deleted!");
+
             return NoContent();
+        }
+
+        [HttpPut("updateReminder")]
+        public async Task<IActionResult> UpdateReminder([FromBody] UpdateReminderRequest updateReminderRequest)
+        {
+            if(updateReminderRequest == null)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _serviceManager.ReminderService.UpdateReminderAsync(updateReminderRequest);
+
+                _logger.Information("The reminder was updated!");
+            }
+            catch(Exception ex)
+            {
+                _logger.Error(ex, "Something went wrong during an reminder updating!");
+
+                return BadRequest();
+            }
+
+            return Ok();
         }
     }
 }

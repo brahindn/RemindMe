@@ -7,5 +7,6 @@ namespace RemindMe.Application.IRepositories
         Task<Reminder> GetReminderAsync(Guid reminderId);
         void Create(Reminder reminder);
         void Delete(Reminder reminder);
+        void Update(Reminder reminder);
     }
 }

@@ -9,5 +9,6 @@ namespace RemindMe.Application.IServices
         Task<GetReminderResponse> GetReminderAsync(Guid id);
         Task CreateReminderAsync(CreateReminderRequest createReminderRequest);
         Task DeleteReminderAsync(Guid reminderId);
+        Task UpdateReminderAsync(UpdateReminderRequest updateReminderRequest);
     }
 }

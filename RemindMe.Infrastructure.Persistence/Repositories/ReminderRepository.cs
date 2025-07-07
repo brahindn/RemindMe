@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RemindMe.Application.IRepositories;
 using RemindMe.Domain.Entities;
-using System.Security.Cryptography.X509Certificates;
 
 namespace RemindMe.Infrastructure.Persistence.Repositories
 {

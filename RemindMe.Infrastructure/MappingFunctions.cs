@@ -1,7 +1,9 @@
-﻿namespace RemindMe.Infrastructure
+﻿
+
+namespace RemindMe.Infrastructure
 {
     public static class MappingFunctions
     {
-        
+
     }
 }
