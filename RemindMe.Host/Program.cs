@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using RemindMe.Application.IRepositories;
 using RemindMe.Application.IServices;
+using RemindMe.Domain.Entities;
 using RemindMe.Host.ServiceExtensions;
 using RemindMe.Infrastructure.Persistence;
 using RemindMe.Infrastructure.Persistence.Repositories;
@@ -26,7 +27,7 @@ builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddSingleton<ILogger>(loggerConfiguration);
 
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages();   
 builder.Services.AddServerSideBlazor();
 
 builder.Services.ConfigureCors();
@@ -36,13 +37,15 @@ builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(opt =>
 {
-    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "RemindMe", Version = "v1" });
+    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "RemindMe", Version = "v1" }); //Ok
+
     opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
-        Description = "Please enter token",
+        Description = "Please enter a token",
         Name = "Authorization",
         Type = SecuritySchemeType.Http,
         BearerFormat = "JWT",
@@ -78,7 +81,7 @@ else
     app.UseHsts();
 }
 
-    app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseForwardedHeaders(new ForwardedHeadersOptions
